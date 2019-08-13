@@ -6,7 +6,7 @@
     <div class="right-menu">
       <el-dropdown class="right-menu-item hover-effect" trigger="click">
         <div class="text-primary">
-          <span>{{$store.state.user.nickName}}</span>
+          <span>{{$store.state.user.name}}</span>
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
@@ -27,7 +27,7 @@
 <script>
 import Hamburger from '@vue-common/components/common/hamburger'
 import Breadcrumb from '@vue-common/components/element-ui/breadcrumb'
-import { logout as LogoutService } from '../../../services/user'
+import { logout as LogoutService } from '@/services/user'
 export default {
   name: 'NavBar',
   components: {

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import LoginCommonPage from '@common/pages/account/login'
+import LoginCommonPage from '@vue-common/pages/common/account/login'
 import * as Service from './service'
 export default {
   name: 'LoginPage',

@@ -26,7 +26,7 @@
 
 <script>
 import SideBar from '@vue-common/components/element-ui/sidebar'
-import NavBar from '@common/components/element-ui/navbar'
+import NavBar from '@/components/navbar'
 import GobalAlert from '@vue-common/components/element-ui/gobal-alert'
 import PageOpenedTags from '@vue-common/components/element-ui/page-opened-tags'
 export default {
@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../vue-common/assets/styles/element-ui/variables/variables.scss";
+@import "../../../vue-common/assets/styles/element-ui/variables/variables.scss";
 .layout {
   position: relative;
   height: 100%;

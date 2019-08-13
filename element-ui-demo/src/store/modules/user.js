@@ -1,13 +1,26 @@
 /**
- * 系统相关
+ * 用户相关
  */
-import { resetRouter, router } from '../../router'
-import { getBaseInfo as ServiceGetUserInfo } from '@common/services/user'
+import router from '../../router'
+import Router from 'vue-router'
+import { getBaseInfo as ServiceGetUserInfo } from '@/services/user'
+
+/**
+ * 重置路由
+ */
+function resetRouter () {
+  const newRouter = new Router({
+    routes: [],
+    scrollBehavior: () => ({ y: 0 })
+  })
+  router.matcher = newRouter.matcher
+}
+
 export default {
   state: {
     id: undefined,
     account: undefined,
-    nickName: '用户',
+    name: '用户',
     permission: undefined
   },
   getters: {
@@ -45,12 +58,6 @@ export default {
           router.addRoutes(routes)
         })
       }
-      // if (state.id !== permission) {
-      // }
-      // resetRouter()
-      // dispatch('GenerateRoutes').then(routes => {
-      //   router.addRoutes(routes)
-      // })
     },
     'GetUserInfo' ({ commit, dispatch, state }) {
       // 调用接口获取用户信息

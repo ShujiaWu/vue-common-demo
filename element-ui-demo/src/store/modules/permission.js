@@ -1,8 +1,8 @@
 /**
  * 权限
  */
-import { fullRoutes } from '@common/router'
-import { store } from '../../store'
+import fullRoutes from '@/router/routes'
+import store from '../../store'
 import { filterRoutes } from '../../utils/router'
 // let routes = []
 export default {

@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import App from '@common/pages/App.vue'
+import App from './pages/App.vue'
 import router from './router'
 import store from './store'
 import axios from './backend/index'
-import filters from '@common/filters/index'
-import components from '@common/components/element-ui/base/index'
+import filters from './filters/index'
+import components from '@/components/base/index'
 import { debounce } from 'lodash'
 
 import SessionStorage from '@vue-common/utils/session-storage'

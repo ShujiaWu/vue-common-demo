@@ -1,5 +1,5 @@
 
-import Layout from '@common/pages/Layout'
+import Layout from '@/pages/Layout'
 export default [
   {
     path: '/system',

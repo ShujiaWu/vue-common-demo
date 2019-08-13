@@ -45,7 +45,7 @@
 <script>
 import Form from './add-edit-dialog-form'
 import { add as ServiceAdd, modify as ServiceModify, getRolePermission as ServiceGetRolePermission } from './service'
-import { fullRoutes } from '@common/router'
+import fullRoutes from '@/router/routes'
 import PageFns from '../../../page-fns'
 export default {
   created () {

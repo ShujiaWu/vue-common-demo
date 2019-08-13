@@ -3,7 +3,7 @@
  *
  * 系统路由配置
  */
-import Layout from '@common/pages/Layout'
+import Layout from '@/pages/Layout'
 import Account from './routes/account'
 import System from './routes/system'
 
@@ -30,7 +30,7 @@ export default [
     children: [
       {
         path: '/redirect/:path*',
-        component: () => import('@common/pages/redirect')
+        component: () => import('@vue-common/pages/common/redirect')
       }
     ]
   },
@@ -64,7 +64,7 @@ export default [
       title: '401',
       white: true
     },
-    component: resolve => require(['@common/pages/error/401'], resolve)
+    component: resolve => require(['@vue-common/pages/common/error/401'], resolve)
   },
   {
     path: '*',
@@ -74,6 +74,6 @@ export default [
       title: '404',
       white: true
     },
-    component: resolve => require(['@common/pages/error/404'], resolve)
+    component: resolve => require(['@vue-common/pages/common/error/404'], resolve)
   }
 ]
