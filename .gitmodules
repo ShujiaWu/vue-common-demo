@@ -1,0 +1,3 @@
+[submodule "vue-common"]
+	path = vue-common
+	url = git@gitee.com:wushujia/vue-common.git
