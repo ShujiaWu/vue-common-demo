@@ -63,33 +63,17 @@ Vue.use(components)
 // 窗体改变事件
 // ===============================================
 let onresize = debounce(() => {
-  store.dispatch('WindowResize')
+  store.dispatch('window/WindowResize')
 }, 100)
 
 window.onresize = onresize
 
-// store.dispatch('GenerateRoutes')
-// store.dispatch('ChangeUserPermission')
-
 axios.get('/')
 
-store.dispatch('GetUserInfo').then(() => {
+store.dispatch('user/GetUserInfo').then(() => {
   new Vue({
     router,
     store,
     render: h => h(App)
   }).$mount('#app')
 })
-
-// try {
-//   let data = JSON.parse(localStorage.getItem('User_Info'))
-
-//   if (data) {
-//     store.dispatch('GetUserInfo', data)
-//   } else {
-//     store.dispatch('ChangeUserPermission')
-//   }
-// } catch (e) {
-//   console.log(e)
-//   store.dispatch('ChangeUserPermission')
-// }

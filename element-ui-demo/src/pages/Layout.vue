@@ -37,7 +37,7 @@ export default {
     PageOpenedTags
   },
   mounted () {
-    this.$store.dispatch('WindowResize')
+    this.$store.dispatch('window/WindowResize')
   },
   computed: {
     fixedHeader () {

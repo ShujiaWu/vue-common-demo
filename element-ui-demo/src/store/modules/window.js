@@ -1,4 +1,5 @@
 export default {
+  namespaced: true, // 启用命名空间，使用的时候是 命名空间/mutation 命名空间/action
   state: {
     body: {
       width: 0,

@@ -70,7 +70,7 @@ router.beforeEach((to, from, next) => {
   console.log(to.name, '，是否需要登录：', isNeedLogin)
   if (isNeedLogin) {
     // 获取用户基础信息
-    store.dispatch('GetUserInfo').then(result => {
+    store.dispatch('user/GetUserInfo').then(result => {
       if (result.isSuccess) {
         getUserPagePermission(to.name).then(result => {
           if (result.data) {
@@ -114,7 +114,7 @@ router.afterEach(route => {
   // ============================================================
   if (store) {
     setTimeout(() => {
-      store.dispatch('WindowResize')
+      store.dispatch('window/WindowResize')
     }, 500)
   }
   NProgress.done()

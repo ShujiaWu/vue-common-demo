@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     changePermission (value) {
-      this.$store.dispatch('ChangeUserPermission', value)
+      this.$store.dispatch('user/ChangeUserPermission', value)
     },
     changePermissionPage (name) {
       this.$router.push(name)

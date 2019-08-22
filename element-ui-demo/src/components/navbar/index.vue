@@ -44,7 +44,7 @@ export default {
   methods: {
     toggleSideBar () {
       this.sidebar.collapse = !this.sidebar.collapse
-      this.$store.dispatch('AppSideBarCollapseStatusChange', this.sidebar.collapse)
+      this.$store.dispatch('app/AppSideBarCollapseStatusChange', this.sidebar.collapse)
     },
     logout () {
       LogoutService().then(result => {
@@ -54,7 +54,7 @@ export default {
             type: 'success'
           })
           this.$router.push('/login')
-          this.$store.dispatch('UserLogout')
+          this.$store.dispatch('user/UserLogout')
         } else {
           this.$message({
             message: `退出失败，${result.message}`,

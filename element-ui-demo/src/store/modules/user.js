@@ -17,6 +17,7 @@ function resetRouter () {
 }
 
 export default {
+  namespaced: true, // 启用命名空间，使用的时候是 命名空间/mutation 命名空间/action
   state: {
     id: undefined,
     account: undefined,
@@ -54,7 +55,7 @@ export default {
       if (state.permission !== permission) {
         commit('SET_USER_PERMISSION', permission)
         resetRouter()
-        dispatch('GenerateRoutes').then(routes => {
+        dispatch('permission/GenerateRoutes', null, { root: true }).then(routes => {
           router.addRoutes(routes)
         })
       }
@@ -88,10 +89,10 @@ export default {
     'UserLogout' ({ commit, dispatch }) {
       commit('RESET_USER_INFO')
       resetRouter()
-      dispatch('GenerateRoutes').then(routes => {
+      dispatch('permission/GenerateRoutes', null, { root: true }).then(routes => {
         router.addRoutes(routes)
       })
-      dispatch('AppCloseAllPage')
+      dispatch('app/AppCloseAllPage', null, { root: true })
     }
 
   }

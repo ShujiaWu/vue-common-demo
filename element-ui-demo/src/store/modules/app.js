@@ -2,6 +2,7 @@
  * 系统相关
  */
 export default {
+  namespaced: true, // 启用命名空间，使用的时候是 命名空间/mutation 命名空间/action
   state: {
     sidebar: {
       collapse: false
@@ -115,14 +116,14 @@ export default {
       }
       commit('SET_APP_GOBAL_ALERT_SHOW', Object.assign(defaultConfig, config))
       setTimeout(() => {
-        dispatch('WindowResize')
+        dispatch('window/WindowResize')
       }, 50)
     },
     // 关闭全局通知
     'AppGobalAlertClose' ({ commit, dispatch }) {
       commit('SET_APP_GOBAL_ALERT_CLOSE')
       setTimeout(() => {
-        dispatch('WindowResize')
+        dispatch('window/WindowResize')
       }, 100)
     },
     // 打开新的页面
