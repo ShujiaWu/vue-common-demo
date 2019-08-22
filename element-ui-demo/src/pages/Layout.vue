@@ -8,7 +8,7 @@
       <div id="header" :class="{'fixed-header': fixedHeader}">
         <NavBar />
         <PageOpenedTags/>
-        <GobalAlert v-if="showGobalAlert" />
+        <GlobalAlert v-if="showGlobalAlert" />
       </div>
       <transition name="fade-transform"
                   mode="out-in">
@@ -27,13 +27,13 @@
 <script>
 import SideBar from '@vue-common/components/element-ui/sidebar'
 import NavBar from '@/components/navbar'
-import GobalAlert from '@vue-common/components/element-ui/gobal-alert'
+import GlobalAlert from '@vue-common/components/element-ui/global-alert'
 import PageOpenedTags from '@vue-common/components/element-ui/page-opened-tags'
 export default {
   components: {
     SideBar,
     NavBar,
-    GobalAlert,
+    GlobalAlert,
     PageOpenedTags
   },
   mounted () {
@@ -46,21 +46,21 @@ export default {
     contentPaddingTop () {
       return this.$store.state.window.header.height + 'px'
     },
-    showGobalAlert () {
-      return this.$store.state.app.gobalAlert.show
+    showGlobalAlert () {
+      return this.$store.state.app.globalAlert.show
     },
-    gobalAlertBig () {
+    globalAlertBig () {
       return (
-        this.$store.state.app.gobalAlert.show &&
-        !!this.$store.state.app.gobalAlert.title &&
-        !!this.$store.state.app.gobalAlert.content
+        this.$store.state.app.globalAlert.show &&
+        !!this.$store.state.app.globalAlert.title &&
+        !!this.$store.state.app.globalAlert.content
       )
     },
-    gobalAlertSmall () {
+    globalAlertSmall () {
       return (
-        this.$store.state.app.gobalAlert.show &&
-        (!!this.$store.state.app.gobalAlert.title ^
-          !!this.$store.state.app.gobalAlert.content)
+        this.$store.state.app.globalAlert.show &&
+        (!!this.$store.state.app.globalAlert.title ^
+          !!this.$store.state.app.globalAlert.content)
       )
     }
   },
@@ -81,7 +81,14 @@ export default {
   &.sidebar-collapse {
     padding-left: 64px;
   }
+  .layout-container {
+    height: 100%;
+  }
+  .router-view {
+    height: 100%;
+  }
 }
+
 .fixed-header {
   position: fixed;
   top: 0;
@@ -104,19 +111,19 @@ export default {
 .fixed-header + .router-view:not(.page) {
   padding-top: 50px;
 }
-// Header + GobalAlert
-.fixed-header.gobal-alert-small + .router-view {
+// Header + GlobalAlert
+.fixed-header.global-alert-small + .router-view {
   // 50 + 42
   padding-top: 92px;
 }
-.fixed-header.gobal-alert-small + .router-view:not(.page) {
+.fixed-header.global-alert-small + .router-view:not(.page) {
   padding-top: 50px;
 }
-.fixed-header.gobal-alert-big + .router-view {
+.fixed-header.global-alert-big + .router-view {
   // 50 + 62
   padding-top: 112px;
 }
-.fixed-header.gobal-alert-big + .router-view:not(.page) {
+.fixed-header.global-alert-big + .router-view:not(.page) {
   padding-top: 112px;
 }
 

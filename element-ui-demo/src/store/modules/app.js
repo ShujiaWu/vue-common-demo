@@ -10,7 +10,7 @@ export default {
     header: {
       fixed: true
     },
-    gobalAlert: {
+    globalAlert: {
       show: false,
       type: 'info',
       closable: false,
@@ -37,12 +37,12 @@ export default {
       state.sidebar.collapse = !!status
     },
     // 显示全局通知
-    'SET_APP_GOBAL_ALERT_SHOW' (state, config) {
-      Object.assign(state.gobalAlert, config)
+    'SET_APP_GLOBAL_ALERT_SHOW' (state, config) {
+      Object.assign(state.globalAlert, config)
     },
     // 关闭全局通知
-    'SET_APP_GOBAL_ALERT_CLOSE' (state) {
-      state.gobalAlert.show = false
+    'SET_APP_GLOBAL_ALERT_CLOSE' (state) {
+      state.globalAlert.show = false
     },
     // 新增标签页
     'INSERT_APP_OPENED_TAG' (state, page) {
@@ -103,7 +103,7 @@ export default {
       commit('SET_APP_SIDEBAR_COLLAPSE_STATUS', status)
     },
     // 显示全局通知
-    'AppGobalAlertShow' ({ commit, dispatch }, config) {
+    'AppGlobalAlertShow' ({ commit, dispatch }, config) {
       // 默认配置
       let defaultConfig = {
         show: true,
@@ -114,16 +114,16 @@ export default {
         title: '',
         content: ''
       }
-      commit('SET_APP_GOBAL_ALERT_SHOW', Object.assign(defaultConfig, config))
+      commit('SET_APP_GLOBAL_ALERT_SHOW', Object.assign(defaultConfig, config))
       setTimeout(() => {
-        dispatch('window/WindowResize')
+        dispatch('window/WindowResize', null, { root: true })
       }, 50)
     },
     // 关闭全局通知
-    'AppGobalAlertClose' ({ commit, dispatch }) {
-      commit('SET_APP_GOBAL_ALERT_CLOSE')
+    'AppGlobalAlertClose' ({ commit, dispatch }) {
+      commit('SET_APP_GLOBAL_ALERT_CLOSE')
       setTimeout(() => {
-        dispatch('window/WindowResize')
+        dispatch('window/WindowResize', null, { root: true })
       }, 100)
     },
     // 打开新的页面

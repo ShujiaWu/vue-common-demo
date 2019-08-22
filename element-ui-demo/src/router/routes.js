@@ -5,6 +5,7 @@
  */
 import Layout from '@/pages/Layout'
 import Account from './routes/account'
+import Demo from './routes/demo'
 import System from './routes/system'
 
 /**
@@ -35,6 +36,7 @@ export default [
     ]
   },
   ...Account,
+  ...Demo,
   ...System,
   {
     path: '',

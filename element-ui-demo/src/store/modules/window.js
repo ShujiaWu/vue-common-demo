@@ -45,7 +45,7 @@ export default {
         }
         // // 如果页面用了模板 + 10px （如果有全局通知就不加）
         // let pageEle = document.getElementsByClassName('router-view')
-        // if (pageEle.length && pageEle[0].classList.contains('page') && !headerEle.getElementsByClassName('gobal-alert').length) {
+        // if (pageEle.length && pageEle[0].classList.contains('page') && !headerEle.getElementsByClassName('global-alert').length) {
         //   obj.header.height += 10
         // }
       }
