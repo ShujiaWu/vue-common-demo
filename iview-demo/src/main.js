@@ -1,27 +1,21 @@
 import Vue from 'vue'
-import App from './pages/App.vue'
+import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from './backend/index'
-import filters from './filters/index'
-import components from '@/components/base/index'
+import filters from '@common/filters/index'
+import components from '@common/components/base/index'
 import { debounce } from 'lodash'
 
 import SessionStorage from '@vue-common/utils/session-storage'
 import LocalStorage from '@vue-common/utils/local-storage'
 
-import Color from '@vue-common/assets/styles/element-ui/variables/color.scss'
-
-import Element from 'element-ui'
-// 重置CSS
-import 'normalize.css/normalize.css'
-import 'element-ui/lib/theme-chalk/index.css'
-import '@/assets/styles/index.scss'
-// logo
-import LogoImg from './assets/img/logo.png'
-
+import './plugins'
 // 导入Icon
 import '@/icons'
+
+// logo
+import LogoImg from './assets/img/logo.png'
 
 Vue.config.productionTip = false
 
@@ -30,8 +24,6 @@ Vue.prototype.http = axios
 
 Vue.prototype.$SessionStorage = SessionStorage
 Vue.prototype.$LocalStorage = LocalStorage
-
-Vue.prototype.$Color = Color
 
 // ===============================================
 // 系统信息配置
@@ -42,14 +34,11 @@ Vue.prototype.APP = {
   showLogo: true
 }
 
-// 使用Element UI
-Vue.use(Element, {})
-
 // ===============================================
 // 注册过滤器
 // ===============================================
 for (var key in filters) {
-  if (filters.hasOwnProperty(key)) {
+  if (Object.hasOwnProperty.call(filters, key)) {
     Vue.filter(key, filters[key])
   }
 }
@@ -62,18 +51,23 @@ Vue.use(components)
 // ===============================================
 // 窗体改变事件
 // ===============================================
-let onresize = debounce(() => {
-  store.dispatch('window/WindowResize')
+const onresize = debounce(() => {
+  store.dispatch('window/Resize')
 }, 100)
 
 window.onresize = onresize
 
-axios.get('/')
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app')
 
-store.dispatch('user/GetUserInfo').then(() => {
-  new Vue({
-    router,
-    store,
-    render: h => h(App)
-  }).$mount('#app')
-})
+// TODO: 获取用户信息
+// store.dispatch('user/GetUserInfo').then(() => {
+//   new Vue({
+//     router,
+//     store,
+//     render: h => h(App)
+//   }).$mount('#app')
+// })
