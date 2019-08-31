@@ -7,7 +7,13 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
-  "dependencies": {},
+  "dependencies": {
+    "element-ui": "^2.8.2",
+    "mockjs": "^1.0.1-beta3",
+    "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
+    "path-to-regexp": "^3.0.0"
+  },
   "devDependencies": {
     "@vue/cli-service": "^3.5.0"
   }

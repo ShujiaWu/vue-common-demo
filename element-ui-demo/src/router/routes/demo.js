@@ -64,6 +64,15 @@ export default [
           title: 'PDF查看(PDF.js)',
           permission: true
         }
+      },
+      {
+        path: 'cached-page',
+        name: 'CachedPage',
+        component: () => import('../../pages/demo/cached-page'),
+        meta: {
+          title: '缓存页面',
+          permission: true
+        }
       }
     ]
   }
