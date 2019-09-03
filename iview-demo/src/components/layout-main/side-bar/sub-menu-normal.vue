@@ -1,26 +1,26 @@
 <template>
   <!-- 没有子菜单 -->
-  <Menu-item :name="menus.target.url"
-             v-if="(!menus.menus || (menus.menus.length === 0 && menus.target && menus.target.url))">
+  <Menu-item :name="menus.path || menus.url"
+             v-if="!menus.children">
     <!-- icon -->
     <Icon :type="menus.icon"
           :size="16"></Icon>
     <!-- 名称 -->
-    <span class="layout-text">{{menus.name}}</span>
+    <span class="layout-text">{{menus.title}}</span>
   </Menu-item>
   <!-- 有子菜单 -->
   <Submenu :name="menus.name"
-           v-else-if="!(!menus.menus || (menus.menus.length === 0 && menus.target && menus.target.url))">
+           v-else>
     <!-- 分组名称 -->
     <template slot="title">
       <!-- icon -->
       <Icon :type="menus.icon"
             :size="16"></Icon>
       <!-- 名称 -->
-      <span class="layout-text">{{menus.name}}</span>
+      <span class="layout-text">{{menus.title}}</span>
     </template>
     <!-- 菜单内容 -->
-    <template v-for="(menu, index) in menus.menus">
+    <template v-for="(menu, index) in menus.children">
       <SubMenuNormal :menus="menu"
                      :key="index" />
     </template>

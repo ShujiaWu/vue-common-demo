@@ -7,6 +7,7 @@
     <!-- 缩小模式 -->
     <MenuShrink :menus="menus"
                 :activeName="activeName"
+                @click="itemClick"
                 v-else />
   </div>
 </template>
@@ -33,6 +34,11 @@ export default {
   data () {
     return {
       activeName: 'URL-2-2-1'
+    }
+  },
+  methods: {
+    itemClick (item) {
+      this.activeName = item.path || item.url
     }
   }
 }

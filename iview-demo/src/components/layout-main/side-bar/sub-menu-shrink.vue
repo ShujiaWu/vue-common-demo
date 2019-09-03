@@ -1,24 +1,29 @@
 <template>
-  <Dropdown placement="right-start"
+  <div class="menu-shrink-dropdown-item-content"
+       @click="itemClick(menu)"
+       v-if="!menu.children">
+    <Icon :type="menu.icon"
+          :size="16"></Icon>
+    <span style="padding-left:10px;">{{ menu.title }}</span>
+  </div>
+  <Dropdown v-else
+            placement="right-start"
             transfer-class-name="sub-menu-shrink-dropdown"
             :stop-propagation="true">
     <div class="menu-item">
       <Icon :size="16"
-            :type="menus.icon"></Icon>
-      <span style="padding-left:10px;">{{ menus.name }}</span>
+            :type="menu.icon"></Icon>
+      <span style="padding-left:10px;">{{ menu.title }}</span>
     </div>
-    <!-- 子菜单 -->
     <DropdownMenu style="width: 200px;"
                   slot="list">
-      <DropdownItem v-for="(item, menu_index) in menus.menus"
+      <DropdownItem v-for="(item, menu_index) in menu.children"
                     class="single-item"
-                    :class="{active: item.target.url === activeName}"
+                    :class="{active: (item.path || item.url) === activeName}"
                     :key="menu_index">
-        <div class="menu-shrink-dropdown-item">
-          <Icon :type="item.icon"
-                :size="16"></Icon>
-          <span style="padding-left:10px;">{{ item.name }}</span>
-        </div>
+        <SubMenuShrink :menu="item"
+                       :activeName="activeName"
+                       @click="itemClick" />
       </DropdownItem>
     </DropdownMenu>
   </Dropdown>
@@ -32,9 +37,14 @@ export default {
       type: String,
       default: undefined
     },
-    menus: {
-      type: [Array, Object],
-      default: () => []
+    menu: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  methods: {
+    itemClick (item) {
+      this.$emit('click', item)
     }
   }
 }

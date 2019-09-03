@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './layout/App'
+import App from './views/layout/App'
 import router from './router'
 import store from './store'
 import axios from './backend/index'
@@ -9,6 +9,8 @@ import { debounce } from 'lodash'
 
 import SessionStorage from '@vue-common/utils/session-storage'
 import LocalStorage from '@vue-common/utils/local-storage'
+
+import { initUserRouterAndMenu } from './libs/utils'
 
 import './plugins'
 // 导入Icon
@@ -59,11 +61,17 @@ const onresize = debounce(() => {
 
 window.onresize = onresize
 
+/* eslint-disable no-new */
 new Vue({
+  el: '#app',
   router,
   store,
-  render: h => h(App)
-}).$mount('#app')
+  render: h => h(App),
+  mounted () {
+    console.log('-------------------App 挂载')
+    initUserRouterAndMenu()
+  }
+})
 
 // TODO: 获取用户信息
 // store.dispatch('user/GetUserInfo').then(() => {

@@ -3,7 +3,7 @@
  *
  * 系统路由配置
  */
-import MainLayout from '@/layout/Main'
+import MainLayout from '@/views/layout/Main'
 
 /**
 * hidden: true                   是否在左侧菜单隐藏显示，默认：false
@@ -20,7 +20,7 @@ import MainLayout from '@/layout/Main'
   }
 **/
 
-export default [
+export const defaultRoutes = [
   {
     path: '/redirect',
     component: MainLayout,
@@ -33,7 +33,7 @@ export default [
     ]
   },
   {
-    path: '',
+    path: '/',
     component: MainLayout,
     redirect: 'dashboard',
     meta: {
@@ -43,15 +43,38 @@ export default [
       {
         path: '/dashboard',
         name: 'Dashboard',
-        component: () => import('@/pages/dashboard'),
+        component: () => import('@/views/pages/dashboard'),
         hidden: true,
         meta: {
           title: 'Dashboard',
           noCached: true
         }
+      },
+      {
+        path: 't1',
+        name: 'T1',
+        component: () => import('@/views/pages/demo/t1'),
+        hidden: true,
+        meta: {
+          title: 'T1',
+          noCached: true
+        }
       }
     ]
-  },
+  }
+]
+
+// 作为Main组件的子页面展示但是不在左侧菜单显示的路由写在otherRouter里
+export const otherRoutes = {
+  path: '/',
+  name: 'otherRouter',
+  // redirect: '/home',
+  component: MainLayout,
+  children: [
+  ]
+}
+// 错误处理页面
+export const errorRoutes = [
   {
     path: '/401',
     name: '401',
@@ -61,15 +84,23 @@ export default [
       white: true
     },
     component: resolve => require(['@vue-common/pages/common/error/401'], resolve)
-  },
-  {
-    path: '*',
-    name: '404',
-    hidden: true,
-    meta: {
-      title: '404',
-      white: true
-    },
-    component: resolve => require(['@vue-common/pages/common/error/404'], resolve)
   }
+
+]
+
+export const Error404 = {
+  path: '*',
+  name: '404',
+  hidden: true,
+  meta: {
+    title: '404',
+    white: true
+  },
+  component: resolve => require(['@vue-common/pages/common/error/404'], resolve)
+}
+
+export default [
+  ...defaultRoutes,
+  otherRoutes,
+  ...errorRoutes
 ]

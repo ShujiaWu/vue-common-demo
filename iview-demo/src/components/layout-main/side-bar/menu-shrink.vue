@@ -3,9 +3,10 @@
     <template v-for="(category, category_index) in menus">
       <!-- 没有子菜单 -->
       <div class="menu-shrink-item"
-           :class="{active: category.target.url === activeName}"
+           :class="{active: category.url === activeName}"
            :key="category_index"
-           v-if="(!category.menus || (category.menus.length === 0 && category.target && category.target.url))">
+           @click="itemClick(category)"
+           v-if="!category.children">
         <Icon :type="category.icon"
               :size="16"></Icon>
       </div>
@@ -19,7 +20,7 @@
                 :key="category_index"
                 transfer-class-name="menu-shrink-dropdown"
                 :stop-propagation="true"
-                v-if="!(!category.menus || (category.menus.length === 0 && category.target && category.target.url))">
+                v-if="category.children">
         <div class="menu-shrink-item">
           <Icon :size="16"
                 :type="category.icon"></Icon>
@@ -28,19 +29,11 @@
         <DropdownMenu style="width: 200px;"
                       slot="list">
           <DropdownItem :key="menu_index"
-                        v-for="(item, menu_index) in category.menus"
-                        :class="{active: item.target && item.target.url === activeName}">
-            <!-- 只有一个子菜单 -->
-            <div class="menu-shrink-dropdown-item-content"
-                 v-if="(!item.menus || (item.menus.length === 0 && item.target && item.target.url))">
-              <Icon :type="item.icon"
-                    :size="16"></Icon>
-              <span style="padding-left:10px;">{{ item.name }}</span>
-            </div>
-            <!-- 有子菜单 -->
-            <SubMenuShrink :menus="item"
+                        v-for="(item, menu_index) in category.children"
+                        :class="{active:(item.path || item.url) === activeName}">
+            <SubMenuShrink :menu="item"
                            :activeName="activeName"
-                           v-if="!(!item.menus || (item.menus.length === 0 && item.target && item.target.url))" />
+                           @click="itemClick" />
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
@@ -54,8 +47,8 @@ export default {
   name: 'MenuShrink',
   props: {
     menus: {
-      type: [Array, Object],
-      default: () => []
+      type: Array,
+      default: () => {}
     },
     activeName: {
       type: String,
@@ -64,6 +57,11 @@ export default {
   },
   components: {
     SubMenuShrink
+  },
+  methods: {
+    itemClick (item) {
+      this.$emit('click', item)
+    }
   }
 }
 </script>

@@ -46,10 +46,12 @@ export default {
 .layout-main {
   display: flex;
   height: 100%;
-  transition: all 0.3s linear;
   &.has-main-menu {
     .content-main {
       padding-left: 256px;
+      flex: 1;
+      transition: all @animation-time linear;
+      z-index: 11;
     }
   }
   &.shrink {

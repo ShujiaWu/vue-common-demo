@@ -26,6 +26,7 @@ Vue.use(Router)
 // const routes = filterRoutesSync(defaultRoutes)
 
 const router = new Router({
+  mode: 'history',
   routes: routes,
   scrollBehavior: () => ({ y: 0 })
 })
