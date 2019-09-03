@@ -12,14 +12,5 @@
   },
   "devDependencies": {
     "@vue/cli-service": "^3.5.0"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,vue}": [
-      "vue-cli-service lint",
-      "git add"
-    ]
   }
 }
