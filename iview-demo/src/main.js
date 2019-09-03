@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './layout/App'
 import router from './router'
 import store from './store'
 import axios from './backend/index'
-import filters from '@common/filters/index'
-import components from '@common/components/base/index'
+import filters from './filters/index'
+import components from './components/base/index'
 import { debounce } from 'lodash'
 
 import SessionStorage from '@vue-common/utils/session-storage'
@@ -16,6 +16,8 @@ import '@/icons'
 
 // logo
 import LogoImg from './assets/img/logo.png'
+
+import '@/assets/styles/index.less'
 
 Vue.config.productionTip = false
 

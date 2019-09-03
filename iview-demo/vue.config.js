@@ -45,6 +45,13 @@ module.exports = {
       }
     }
   },
+  css: {
+    loaderOptions: {
+      less: {
+        javascriptEnabled: true
+      }
+    }
+  },
   chainWebpack (config) {
     const cdn = {
       // inject tinymce into index.html
@@ -78,6 +85,10 @@ module.exports = {
         symbolId: 'icon-[name]'
       })
       .end()
+
+    // 全局 LESS 变量
+    const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
+    types.forEach(type => addStyleResource(config.module.rule('less').oneOf(type)))
 
     // set preserveWhitespace
     config.module
@@ -134,4 +145,25 @@ module.exports = {
         }
       )
   }
+  // pluginOptions: {
+  //   'style-resources-loader': {
+  //     preProcessor: 'less',
+  //     patterns: [
+  //       // 这个是加上自己的路径，
+  //       // 注意：试过不能使用别名路径
+  //       path.resolve(__dirname, './src/assets/styles/variable.less')
+  //     ]
+  //   }
+  // }
+}
+
+function addStyleResource (rule) {
+  rule.use('style-resource')
+    .loader('style-resources-loader')
+    .options({
+      patterns: [
+        // 需要全局导入的less路径
+        path.resolve(__dirname, './src/assets/styles/variables.less')
+      ]
+    })
 }
