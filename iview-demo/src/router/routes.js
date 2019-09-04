@@ -51,12 +51,12 @@ export const defaultRoutes = [
         }
       },
       {
-        path: 't1',
-        name: 'T1',
-        component: () => import('@/views/pages/demo/t1'),
+        path: 'system/menus',
+        name: 'SystemMenu',
+        component: () => import('@/views/pages/system/menu'),
         hidden: true,
         meta: {
-          title: 'T1',
+          title: '菜单配置',
           noCached: true
         }
       }

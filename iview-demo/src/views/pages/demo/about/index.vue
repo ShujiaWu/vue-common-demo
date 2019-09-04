@@ -1,7 +1,10 @@
 <template>
-  <div class="about">
+  <page-layout full-page>
     <div>DemoAbout</div>
-  </div>
+
+  </page-layout>
+  <!-- <div class="about">
+  </div> -->
 </template>
 
 <script>
@@ -15,3 +18,10 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+.about {
+  background: #fff;
+  height: 100%;
+}
+</style>

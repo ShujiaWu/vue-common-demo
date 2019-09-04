@@ -1,5 +1,6 @@
 <template>
-  <div class="nav-bar">
+  <div class="nav-bar"
+       :class="{shrink: shrink}">
     <div class="menu-mode-btn">
       <div class="btn"
            :style="{transform: 'rotateZ(' + (this.shrink ? '-90' : '0') + 'deg)'}"
@@ -65,8 +66,17 @@ export default {
   height: 64px;
   line-height: 64px;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-  transition: all 0.2s ease-in-out;
+  transition: all @animation-time linear;
   display: flex;
+  background: #fff;
+  position: fixed;
+  right: 0;
+  top: 0;
+  left: 256px;
+  z-index: 11;
+  &.shrink {
+    left: 80px;
+  }
   .menu-mode-btn {
     .btn {
       cursor: pointer;

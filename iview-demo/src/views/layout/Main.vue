@@ -9,9 +9,9 @@
       <NavBar :shrink="shrink"
               @modeChange="modeChange" />
       <!-- 核心内容 -->
-      <div>
-        <div>打开的页面</div>
-        <div>
+      <div class="content-box">
+        <!-- <div class="opened-page-tag">打开的页面</div> -->
+        <div class="page-main">
           <router-view></router-view>
         </div>
       </div>
@@ -59,6 +59,18 @@ export default {
       .content-main {
         padding-left: 80px;
       }
+    }
+  }
+
+  .content-main {
+    .content-box {
+      padding-top: 64px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .page-main {
+      flex: 1;
     }
   }
 }
