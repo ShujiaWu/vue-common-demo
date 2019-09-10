@@ -52,6 +52,7 @@ export default {
       flex: 1;
       transition: all @animation-time linear;
       z-index: 11;
+      width: 100%;
     }
   }
   &.shrink {

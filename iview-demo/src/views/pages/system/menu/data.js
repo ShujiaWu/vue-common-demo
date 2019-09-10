@@ -12,7 +12,7 @@ export default () => [
     sortOrder: 0,
     showAlways: 0, // 是否一直显示
     fnType: undefined, // 功能类型
-    status: 1, // 状态
+    enable: 1, // 状态
     children: [
       {
         id: '1-1', // ID
@@ -27,7 +27,7 @@ export default () => [
         sortOrder: 0,
         showAlways: 0, // 是否一直显示
         fnType: undefined, // 功能类型
-        status: 1 // 状态
+        enable: 1 // 状态
       },
       {
         id: '1-2', // ID
@@ -42,7 +42,7 @@ export default () => [
         sortOrder: 0,
         showAlways: 0, // 是否一直显示
         fnType: undefined, // 功能类型
-        status: 1, // 状态
+        enable: 1, // 状态
         children: [
           {
             id: '1-2-1', // ID
@@ -57,7 +57,7 @@ export default () => [
             sortOrder: 0,
             showAlways: 0, // 是否一直显示
             fnType: undefined, // 功能类型
-            status: 1 // 状态
+            enable: 1 // 状态
           },
           {
             id: '1-2-2', // ID
@@ -72,7 +72,7 @@ export default () => [
             sortOrder: 0,
             showAlways: 0, // 是否一直显示
             fnType: undefined, // 功能类型
-            status: 1, // 状态
+            enable: 1, // 状态
             children: [
               {
                 id: '1-2-2-1', // ID
@@ -87,7 +87,7 @@ export default () => [
                 sortOrder: 0,
                 showAlways: 0, // 是否一直显示
                 fnType: 'add', // 功能类型
-                status: 1 // 状态
+                enable: 1 // 状态
               },
               {
                 id: '1-2-2-2', // ID
@@ -102,7 +102,7 @@ export default () => [
                 sortOrder: 0,
                 showAlways: 0, // 是否一直显示
                 fnType: 'delete', // 功能类型
-                status: 1 // 状态
+                enable: 1 // 状态
               }
             ]
           }
@@ -123,7 +123,7 @@ export default () => [
     sortOrder: 0,
     showAlways: 0, // 是否一直显示
     fnType: undefined, // 功能类型
-    status: 1, // 状态
+    enable: 1, // 状态
     children: [
       {
         id: '0', // ID
@@ -138,7 +138,7 @@ export default () => [
         sortOrder: 0,
         showAlways: 0, // 是否一直显示
         fnType: undefined, // 功能类型
-        status: 1 // 状态
+        enable: 1 // 状态
       }
     ]
   }

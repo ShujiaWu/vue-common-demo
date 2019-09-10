@@ -5,19 +5,19 @@ import Vuex from 'vuex'
 // import app from './modules/app'
 // import user from './modules/user'
 // import window from './modules/window'
-// import constants from './modules/constants'
+import constants from './modules/constants'
 import sideBar from './modules/side-bar'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
-    sideBar
+    sideBar,
     // permission,
     // app,
     // user,
     // window,
-    // constants
+    constants
   }
 })
 

@@ -33,6 +33,14 @@ export const defaultRoutes = [
     ]
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/pages/account/login'),
+    meta: {
+      title: '登录'
+    }
+  },
+  {
     path: '/',
     component: MainLayout,
     redirect: 'dashboard',
@@ -57,6 +65,26 @@ export const defaultRoutes = [
         hidden: true,
         meta: {
           title: '菜单配置',
+          noCached: true
+        }
+      },
+      {
+        path: 'system/roles',
+        name: 'SystemRoleList',
+        component: () => import('@/views/pages/system/role/list'),
+        hidden: true,
+        meta: {
+          title: '角色配置',
+          noCached: true
+        }
+      },
+      {
+        path: 'system/users',
+        name: 'SystemUserList',
+        component: () => import('@/views/pages/system/user/list'),
+        hidden: true,
+        meta: {
+          title: '用户管理',
           noCached: true
         }
       }

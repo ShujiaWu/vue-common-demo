@@ -2,7 +2,7 @@ import axios from 'axios'
 import router from '../router'
 import cookie from 'js-cookie'
 import Qs from 'qs'
-axios.defaults.baseURL = '/api'
+axios.defaults.baseURL = '/coa/admin'
 axios.defaults.paramsSerializer = function (params) {
   return Qs.stringify(params, {
     arrayFormat: 'repeat'
@@ -54,19 +54,27 @@ axios.interceptors.request.use(config => {
 
 /**
  * 响应处理
+ * 200: 成功
+ * 400: Bad Request
+ * 401: 未登录
+ * 403: 权限不足
+ * 404: NotFound
+ * 40001: 系统处理异常
+ * 40002: 业务处理异常
+ * 40003: 参数有误
  */
 axios.interceptors.response.use(response => {
   let isSuccess = true
   let message = ''
   switch (response.data.code) {
-    case '10000':
-    case 10000:
+    case '200':
+    case 200:
     case 'Success':
       isSuccess = true
       message = response.data.msg || response.data.message
       break
-    case '20001':
-    case 20001:
+    case '401':
+    case 401:
       // 未登录
       isSuccess = false
       message = response.data.msg
@@ -80,8 +88,8 @@ axios.interceptors.response.use(response => {
         })
       }
       break
-    case '40003':
-    case 40003:
+    case '403':
+    case 403:
       // 权限不足
       isSuccess = false
       message = response.data.msg || response.data.message

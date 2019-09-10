@@ -1,10 +1,128 @@
 import data from './data'
+import axios from 'axios'
+
+/**
+ * 获取所有的菜单 -- 左侧菜单树
+ */
 export function getAllMenus () {
-  const dat = data()
-  initMenuData(dat)
-  return Promise.resolve({
-    isSuccess: true,
-    data: dat
+  return axios.get('rbac/menu/all').then(result => {
+    if (result.isSuccess) {
+      initMenuData(result.data)
+    }
+    return result
+  })
+  // const dat = data()
+  // initMenuData(dat)
+  // return Promise.resolve({
+  //   isSuccess: true,
+  //   data: dat
+  // })
+}
+
+/**
+ * 添加菜单
+ * @param {Object} data 菜单数据
+ */
+export function addMenu (data) {
+  const params = {
+    parentId: data.parentId, // 父级ID
+    title: data.title, // 标题
+    titleEn: data.titleEn, // 标题(En)
+    name: data.name, // 名称
+    icon: data.icon, // 图标
+    path: data.path, // 路径
+    url: data.url, // 第三方页面地址
+    component: data.component, // 组件路径
+    sortOrder: data.sortOrder,
+    showAlways: data.showAlways, // 是否一直显示
+    fnType: data.fnType, // 功能类型
+    enable: data.enable // 状态
+  }
+  return axios.post('rbac/menu/add', params).then(result => {
+    if (result.isSuccess) {
+      const data = result.data
+      result.data = {
+        id: data.id,
+        parentId: data.parentId, // 父级ID
+        title: data.title, // 标题
+        titleEn: data.titleEn, // 标题(En)
+        name: data.name, // 名称
+        icon: data.icon, // 图标
+        path: data.path, // 路径
+        url: data.url, // 第三方页面地址
+        component: data.component, // 组件路径
+        sortOrder: data.sortOrder,
+        showAlways: data.showAlways, // 是否一直显示
+        fnType: data.fnType, // 功能类型
+        enable: data.enable, // 状态
+        expand: true,
+        checked: false,
+        selected: false,
+        level: undefined,
+        parent: undefined
+      }
+    }
+    return result
+  })
+}
+
+/**
+ * 修改菜单
+ * @param {Object} data 菜单数据
+ */
+export function updateMenu (data) {
+  const params = {
+    id: data.id, // ID
+    title: data.title, // 标题
+    titleEn: data.titleEn, // 标题(En)
+    name: data.name, // 名称
+    icon: data.icon, // 图标
+    path: data.path, // 路径
+    url: data.url, // 第三方页面地址
+    component: data.component, // 组件路径
+    sortOrder: data.sortOrder,
+    showAlways: data.showAlways, // 是否一直显示
+    fnType: data.fnType, // 功能类型
+    enable: data.enable // 状态
+  }
+  return axios.post('rbac/menu/edit', params).then(result => {
+    if (result.isSuccess) {
+      const data = result.data
+      result.data = {
+        id: data.id,
+        parentId: data.parentId, // 父级ID
+        title: data.title, // 标题
+        titleEn: data.titleEn, // 标题(En)
+        name: data.name, // 名称
+        icon: data.icon, // 图标
+        path: data.path, // 路径
+        url: data.url, // 第三方页面地址
+        component: data.component, // 组件路径
+        sortOrder: data.sortOrder,
+        showAlways: data.showAlways, // 是否一直显示
+        fnType: data.fnType, // 功能类型
+        enable: data.enable, // 状态
+        expand: true,
+        checked: false,
+        selected: false,
+        level: undefined,
+        parent: undefined
+      }
+    }
+    return result
+  })
+}
+
+/**
+ * 删除菜单
+ * @param {Array} ids 菜单id数组
+ */
+export function removeMenu (ids) {
+  const params = {
+    ids
+  }
+  return axios.post('rbac/menu/del', params).then(result => {
+    return result
   })
 }
 
@@ -70,7 +188,7 @@ function initMenuData (menus, parent) {
   menus.forEach(item => {
     // 设置树的状态
     item.expand = true
-    item.checked = true
+    item.checked = false
     item.selected = false
     item.level = parent ? [].concat(parent.level) : []
     item.level.push(item)

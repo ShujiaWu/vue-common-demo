@@ -26,9 +26,8 @@ module.exports = {
     },
     // after: require('./mock/mock-server.js'),
     proxy: {
-      '/api/': {
-        target: 'http://localhost:7001'
-        // target: 'http://lwf-admin.somibo.cn:18080'
+      '/coa/admin/': {
+        target: 'http://coa.somibo.cn:18080'
       },
       '/file/': {
         target: 'http://localhost:3000'
