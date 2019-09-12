@@ -36,7 +36,7 @@ export default {
   },
   data () {
     return {
-      menus: this.$store.state.sideBar.menus
+      menus: this.$store.state.app.sideBar
     }
   },
   methods: {}

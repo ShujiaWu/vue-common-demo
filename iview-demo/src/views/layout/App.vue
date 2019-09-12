@@ -12,6 +12,17 @@ export default {
   data () {
     return {}
   },
+  watch: {
+    $route: {
+      handler: function (val, oldVal) {
+        // 更新sidebar菜单
+        if (val.meta && val.meta.level && val.meta.level.length) {
+          this.$store.dispatch('app/UpdateSideBarMenus', val.meta.level[0])
+        }
+      },
+      deep: true
+    }
+  },
   methods: {}
 }
 </script>

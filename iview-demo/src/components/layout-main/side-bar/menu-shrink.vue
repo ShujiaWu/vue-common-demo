@@ -3,11 +3,11 @@
     <template v-for="(category, category_index) in menus">
       <!-- 没有子菜单 -->
       <div class="menu-shrink-item"
-           :class="{active: category.url === activeName}"
+           :class="{active: category.fullPath === activeName}"
            :key="category_index"
            @click="itemClick(category)"
-           v-if="!category.children">
-        <Icon :type="category.icon"
+           v-if="!category.children && !category.meta.hidden">
+        <Icon :type="category.meta.icon"
               :size="16"></Icon>
       </div>
       <!-- 有子菜单 -->
@@ -20,21 +20,25 @@
                 :key="category_index"
                 transfer-class-name="menu-shrink-dropdown"
                 :stop-propagation="true"
-                v-if="category.children">
+                v-if="category.children && !category.meta.hidden">
         <div class="menu-shrink-item">
           <Icon :size="16"
-                :type="category.icon"></Icon>
+                :type="category.meta.icon"></Icon>
         </div>
         <!-- 子菜单 -->
         <DropdownMenu style="width: 200px;"
                       slot="list">
-          <DropdownItem :key="menu_index"
-                        v-for="(item, menu_index) in category.children"
-                        :class="{active:(item.path || item.url) === activeName}">
-            <SubMenuShrink :menu="item"
-                           :activeName="activeName"
-                           @click="itemClick" />
-          </DropdownItem>
+          <template v-for="(item, menu_index) in category.children">
+
+            <DropdownItem :key="menu_index"
+                          :class="{active: item.fullPath === activeName}"
+                          v-if="!item.meta.hidden">
+              <SubMenuShrink :menu="item"
+                             :activeName="activeName"
+                             :basePath="category.fullPath"
+                             @click="itemClick" />
+            </DropdownItem>
+          </template>
         </DropdownMenu>
       </Dropdown>
     </template>
@@ -43,12 +47,13 @@
 
 <script>
 import SubMenuShrink from './sub-menu-shrink'
+// import path from 'path'
 export default {
   name: 'MenuShrink',
   props: {
     menus: {
       type: Array,
-      default: () => {}
+      default: () => []
     },
     activeName: {
       type: String,
@@ -57,6 +62,11 @@ export default {
   },
   components: {
     SubMenuShrink
+  },
+  created () {
+    // this.menus.forEach(menu => {
+    //   menu.fullPath = menu.path
+    // })
   },
   methods: {
     itemClick (item) {

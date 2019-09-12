@@ -13,7 +13,8 @@ function data (value = {}) {
     sortOrder: undefined,
     showAlways: false, // 是否一直显示
     fnType: undefined, // 功能类型
-    enable: true // 状态
+    enable: true, // 状态
+    hidden: false // 隐藏
   }, value)
 }
 export default () => {

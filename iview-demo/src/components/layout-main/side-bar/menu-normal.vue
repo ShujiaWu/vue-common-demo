@@ -1,13 +1,16 @@
 <template>
   <i-menu :open-names="openNames"
           :active-name="activeName"
-          v-if="menus.length"
           width="256px"
           :accordion="true"
+          ref="menu"
           theme="dark">
-    <SubMenuNormal v-for="(menu, index) in menus"
-                   :key="index"
-                   :menus="menu" />
+    <template v-for="(menu, index) in menus">
+      <SubMenuNormal :key="index"
+                     :menu="menu"
+                     @click="menuClick"
+                     v-if="!menu.meta.hidden" />
+    </template>
   </i-menu>
 </template>
 
@@ -26,11 +29,29 @@ export default {
     activeName: {
       type: String,
       default: undefined
+    },
+    openNames: {
+      type: Array,
+      default: () => []
     }
   },
   data () {
-    return {
-      openNames: []
+    return {}
+  },
+  watch: {
+    // menus (value) {
+    //   console.log('genxin')
+    //   this.$nextTick(() => {
+    //     this.$refs.menu.updateOpened(this.menus)
+    //   })
+    // }
+  },
+  methods: {
+    menuClick (item) {
+      this.$emit('click', item)
+    },
+    updateOpened () {
+      this.$refs.menu.updateOpened()
     }
   }
 }

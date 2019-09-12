@@ -153,6 +153,16 @@
                            placeholder="地址栏中的地址路径">
                   </i-input>
                 </Form-item>
+                <!-- 路径 -->
+                <Form-item label="重定向："
+                           prop="path"
+                           key="redirect-path"
+                           v-if="isShowField(form.data.type, ['TopMenu'])">
+                  <i-input v-model="form.data.path"
+                           key="path"
+                           placeholder="重定向完整路径">
+                  </i-input>
+                </Form-item>
                 <!-- 权限类型 -->
                 <Form-item label="权限类型："
                            prop="fnType"
@@ -227,7 +237,7 @@
                   </i-input>
                 </Form-item>
                 <!-- 是否启用 -->
-                <FormItem label="是否启用"
+                <FormItem label="是否启用："
                           prop="enable"
                           key="enable"
                           v-if="isShowField(form.data.type, ['TopMenu','MenuGroup','Menu','Fn'])">
@@ -241,7 +251,7 @@
                   </i-switch>
                 </FormItem>
                 <!-- 是否一直显示 -->
-                <FormItem label="强制显示"
+                <FormItem label="强制显示："
                           prop="showAlways"
                           key="showAlways"
                           v-if="isShowField(form.data.type, ['MenuGroup'])">
@@ -252,6 +262,20 @@
                             :false-value="false">
                     <span slot="open">启用</span>
                     <span slot="close">禁用</span>
+                  </i-switch>
+                </FormItem>
+                <!-- 是否隐藏 -->
+                <FormItem label="强制隐藏："
+                          prop="hidden"
+                          key="hidden"
+                          v-if="isShowField(form.data.type, ['MenuGroup','Menu'])">
+                  <i-switch size="large"
+                            v-model="form.data.hidden"
+                            key="hidden"
+                            :true-value="false"
+                            :false-value="true">
+                    <span slot="open">显示</span>
+                    <span slot="close">隐藏</span>
                   </i-switch>
                 </FormItem>
                 <Form-item>
@@ -470,7 +494,8 @@ export default {
         showAlways: data.showAlways, // 是否一直显示
         fnType: data.fnType, // 功能类型
         enable: data.enable, // 状态
-        type: data.type // 类型
+        type: data.type, // 类型
+        hidden: data.hidden // 隐藏
       })
       this.current = data
       this.mode = 'edit'
@@ -600,7 +625,7 @@ export default {
       this.$refs.form.resetFields()
       this.form.resetData({
         type: 'Menu',
-        id: this.current.id
+        parentId: this.current.id
       })
     },
     /**

@@ -10,8 +10,6 @@ import { debounce } from 'lodash'
 import SessionStorage from '@vue-common/utils/session-storage'
 import LocalStorage from '@vue-common/utils/local-storage'
 
-import { initUserRouterAndMenu } from './libs/utils'
-
 import './plugins'
 // 导入Icon
 import '@/icons'
@@ -69,7 +67,8 @@ new Vue({
   render: h => h(App),
   mounted () {
     console.log('-------------------App 挂载')
-    initUserRouterAndMenu()
+    // initUserRouterAndMenu()
+    this.$store.dispatch('app/InitRouterAndMenu')
   }
 })
 

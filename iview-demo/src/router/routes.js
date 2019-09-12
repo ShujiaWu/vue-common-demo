@@ -57,37 +57,37 @@ export const defaultRoutes = [
           title: 'Dashboard',
           noCached: true
         }
-      },
-      {
-        path: 'system/menus',
-        name: 'SystemMenu',
-        component: () => import('@/views/pages/system/menu'),
-        hidden: true,
-        meta: {
-          title: '菜单配置',
-          noCached: true
-        }
-      },
-      {
-        path: 'system/roles',
-        name: 'SystemRoleList',
-        component: () => import('@/views/pages/system/role/list'),
-        hidden: true,
-        meta: {
-          title: '角色配置',
-          noCached: true
-        }
-      },
-      {
-        path: 'system/users',
-        name: 'SystemUserList',
-        component: () => import('@/views/pages/system/user/list'),
-        hidden: true,
-        meta: {
-          title: '用户管理',
-          noCached: true
-        }
       }
+      // {
+      //   path: 'system/menus',
+      //   name: 'SystemMenu',
+      //   component: () => import('@/views/pages/system/menu'),
+      //   hidden: true,
+      //   meta: {
+      //     title: '菜单配置',
+      //     noCached: true
+      //   }
+      // },
+      // {
+      //   path: 'system/roles',
+      //   name: 'SystemRoleList',
+      //   component: () => import('@/views/pages/system/role/list'),
+      //   hidden: true,
+      //   meta: {
+      //     title: '角色配置',
+      //     noCached: true
+      //   }
+      // },
+      // {
+      //   path: 'system/users',
+      //   name: 'SystemUserList',
+      //   component: () => import('@/views/pages/system/user/list'),
+      //   hidden: true,
+      //   meta: {
+      //     title: '用户管理',
+      //     noCached: true
+      //   }
+      // }
     ]
   }
 ]

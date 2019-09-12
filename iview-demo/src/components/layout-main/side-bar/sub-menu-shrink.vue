@@ -2,7 +2,7 @@
   <div class="menu-shrink-dropdown-item-content"
        @click="itemClick(menu)"
        v-if="!menu.children">
-    <Icon :type="menu.icon"
+    <Icon :type="menu.meta.icon"
           :size="16"></Icon>
     <span style="padding-left:10px;">{{ menu.title }}</span>
   </div>
@@ -12,17 +12,18 @@
             :stop-propagation="true">
     <div class="menu-item">
       <Icon :size="16"
-            :type="menu.icon"></Icon>
+            :type="menu.meta.icon"></Icon>
       <span style="padding-left:10px;">{{ menu.title }}</span>
     </div>
     <DropdownMenu style="width: 200px;"
                   slot="list">
       <DropdownItem v-for="(item, menu_index) in menu.children"
                     class="single-item"
-                    :class="{active: (item.path || item.url) === activeName}"
+                    :class="{active: item.fullPath === activeName}"
                     :key="menu_index">
         <SubMenuShrink :menu="item"
                        :activeName="activeName"
+                       v-if="!item.meta.hidden"
                        @click="itemClick" />
       </DropdownItem>
     </DropdownMenu>
@@ -30,6 +31,7 @@
 </template>
 
 <script>
+// import path from 'path'
 export default {
   name: 'SubMenuShrink',
   props: {
@@ -40,9 +42,19 @@ export default {
     menu: {
       type: Object,
       default: () => {}
+    },
+    basePath: {
+      type: String,
+      default: '/'
     }
   },
+  created () {
+    // this.menu.fullPath = this.resolvePath(this.menu.path)
+  },
   methods: {
+    // resolvePath (routePath) {
+    //   return path.resolve(this.basePath, routePath)
+    // },
     itemClick (item) {
       this.$emit('click', item)
     }

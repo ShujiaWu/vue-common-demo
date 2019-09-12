@@ -3,7 +3,10 @@
     <!-- 正常模式 -->
     <MenuNormal :menus="menus"
                 :activeName="activeName"
-                v-if="!shrink" />
+                v-if="!shrink"
+                :open-names="openNames"
+                @click="itemClick"
+                ref="normal" />
     <!-- 缩小模式 -->
     <MenuShrink :menus="menus"
                 :activeName="activeName"
@@ -31,14 +34,54 @@ export default {
       default: () => []
     }
   },
+  created () {
+    // this.activeName = this.$route.fullPath
+  },
   data () {
     return {
-      activeName: 'URL-2-2-1'
+      activeName: '',
+      openNames: []
+    }
+  },
+  watch: {
+    $route: {
+      handler: function (val, oldVal) {
+        if (
+          val.meta &&
+          val.meta.level &&
+          val.meta.level.length &&
+          !val.meta.hidden
+        ) {
+          // 非隐藏菜单
+          this.activeName = val.fullPath
+          this.$set(
+            this,
+            'openNames',
+            val.meta.level.map(value => value.fullPath).slice(1)
+          )
+          if (!this.shrink) {
+            this.$nextTick(() => {
+              this.updateOpened()
+            })
+          }
+        } else {
+          this.activeName = undefined
+        }
+      },
+      deep: true,
+      immediate: true
     }
   },
   methods: {
     itemClick (item) {
-      this.activeName = item.path || item.url
+      if (item.fullPath !== this.activeName) {
+        this.$nextTick(() => {
+          this.$router.push(item)
+        })
+      }
+    },
+    updateOpened () {
+      this.$refs.normal.updateOpened()
     }
   }
 }

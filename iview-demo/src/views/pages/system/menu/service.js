@@ -36,7 +36,8 @@ export function addMenu (data) {
     sortOrder: data.sortOrder,
     showAlways: data.showAlways, // 是否一直显示
     fnType: data.fnType, // 功能类型
-    enable: data.enable // 状态
+    enable: data.enable, // 状态
+    hidden: data.hidden // 隐藏
   }
   return axios.post('rbac/menu/add', params).then(result => {
     if (result.isSuccess) {
@@ -83,7 +84,8 @@ export function updateMenu (data) {
     sortOrder: data.sortOrder,
     showAlways: data.showAlways, // 是否一直显示
     fnType: data.fnType, // 功能类型
-    enable: data.enable // 状态
+    enable: data.enable, // 状态
+    hidden: data.hidden // 隐藏
   }
   return axios.post('rbac/menu/edit', params).then(result => {
     if (result.isSuccess) {
