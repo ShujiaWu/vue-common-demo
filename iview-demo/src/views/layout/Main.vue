@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import SideBar from '@/components/layout-main/side-bar'
-import NavBar from '@/components/layout-main/nav-bar'
+import SideBar from '@vue-common/components/iview/layout-main/side-bar'
+import NavBar from '@vue-common/components/iview/layout-main/nav-bar'
 export default {
   name: 'MainLayout',
   components: {

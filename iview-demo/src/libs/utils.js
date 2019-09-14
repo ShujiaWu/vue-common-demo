@@ -136,7 +136,11 @@ function initMenuData (menus, parent) {
 }
 
 function lazyLoading (url) {
-  return () => import(`@/views/${url}`)
+  if (url.startsWith('@')) {
+    return () => import(`@vue-common/pages/${url}`)
+  } else {
+    return () => import(`@/views/${url}`)
+  }
 }
 
 /**
