@@ -16,10 +16,9 @@ import routes from './routes'
 import store from '../store'
 
 // 白名单
-// const whiteList = [
-//   '/',
-//   '/login'
-// ]
+const whiteList = [
+  '/login'
+]
 
 Vue.use(Router)
 
@@ -34,63 +33,32 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   console.log(`离开页面: ${from.path}`)
   // console.log(`---进入页面 [${from.fullPath}] => [${to.fullPath}]----`)
-  // // =================================================
-  // // beforeEach
-  // // =================================================
-  // // 判断用户是否有权限，
-  // // 当用户id为 undefined 时，
-  // // 不管是什么页面（除白名单外）全部跳去登录页
-  // if (store.state.user.id === undefined) {
-  //   if (whiteList.indexOf(to.path) === -1) {
-  //     console.log('---未检测到用户信息， 直接去登录')
-  //     // 非白名单，直接去登陆
-  //     next('/login')
-  //   } else {
-  //     console.log('---未检测到用户信息， 白名单，跳过')
-  //     // 白名单，去页面
-  //     next()
-  //   }
-  //   return
-  // }
-  // // 判断页面是否需要登录
-  // let isNeedLogin = false
-  // if (to.meta && to.meta.permission) {
-  //   isNeedLogin = true
-  // }
-  // console.log(to.name, '，是否需要登录：', isNeedLogin)
-  // if (isNeedLogin) {
-  //   // 获取用户基础信息
-  //   store.dispatch('user/GetUserInfo').then(result => {
-  //     if (result.isSuccess) {
-  //       getUserPagePermission(to.name).then(result => {
-  //         if (result.data) {
-  //           next()
-  //         } else {
-  //           next('/401')
-  //         }
-  //       })
-  //       // ===============================================
-  //       // 权限控制
-  //       // ===============================================
-  //       // let auth = 0
-  //       // if (to.meta && to.meta.permission) {
-  //       //   auth = to.meta.permission
-  //       // } else {
-  //       //   auth = -1
-  //       // }
-  //       // if (auth & result.data.permission) {
-  //       //   next()
-  //       // } else {
-  //       //   next('/401')
-  //       // }
-  //     } else {
-  //       next('/login?redirect=' + location.href.substr(location.href.indexOf('#/') + 1))
-  //     }
-  //   })
-  // } else {
-  //   next()
-  // }
-  next()
+  // =================================================
+  // beforeEach
+  // =================================================
+  // 判断用户是否有权限，
+  // 当用户id为 undefined 时，
+  // 不管是什么页面（除白名单外）全部跳去登录页
+
+  if (store.state.user.id === undefined) {
+    if (whiteList.indexOf(to.path) === -1) {
+      console.log('---未检测到用户信息， 直接去登录')
+      // 非白名单，直接去登陆
+      next('/login')
+    } else {
+      console.log('---未检测到用户信息， 白名单，跳过')
+      // 白名单，去页面
+      next()
+    }
+  } else {
+    store.dispatch('user/GetUserInfo').then(result => {
+      if (result.isSuccess) {
+        next()
+      } else {
+        next('/login?redirect=' + location.href.substr(location.href.indexOf('#/') + 1))
+      }
+    })
+  }
 })
 
 router.afterEach(route => {
@@ -103,6 +71,62 @@ router.afterEach(route => {
   // ============================================================
   // 通知窗体发生改变，改变布局
   // ============================================================
+
+  // 设置标题
+  document.title = route.meta.title
+
+  // 面包屑
+  const breadcurmb = []
+  // 如果不是主页，则加入主页
+  // if (route.name !== 'Dashboard') {
+  //   breadcurmb.push({
+  //     meta: {
+  //       title: '主页'
+  //     },
+  //     name: 'Home',
+  //     path: '/'
+  //   })
+  // }
+  // 遍历页面匹配路由，加入到面包屑中
+  // route.matched.forEach(function (element) {
+  //   // console.log(element)
+  //   if (!element.meta.hidden) {
+  //     breadcurmb.push({
+  //       meta: element.meta,
+  //       name: element.name,
+  //       path: element.meta.disabled
+  //         ? undefined
+  //         : element.path === ''
+  //           ? '/'
+  //           : element.path
+  //     })
+  //   }
+  // }, this)
+
+  if (route.meta && route.meta.level) {
+    for (let i = 1; i < route.meta.level.length; i++) {
+      const element = route.meta.level[i]
+      if (!element.meta.hidden) {
+        breadcurmb.push({
+          title: element.meta.title
+        })
+      }
+    }
+    if (!breadcurmb.length) {
+      breadcurmb.push({
+        title: route.meta.title
+      })
+    } else {
+      if (route.name !== 'Dashboard') {
+        breadcurmb.unshift({
+          title: '主页'
+        })
+      }
+    }
+  }
+
+  store.dispatch('app/UpdateBreadcurmb', breadcurmb)
+
   if (store) {
     setTimeout(() => {
       store.dispatch('window/Resize')

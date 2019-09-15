@@ -60,23 +60,25 @@ const onresize = debounce(() => {
 window.onresize = onresize
 
 /* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  render: h => h(App),
-  mounted () {
-    console.log('-------------------App 挂载')
-    // initUserRouterAndMenu()
-    this.$store.dispatch('app/InitRouterAndMenu')
-  }
-})
-
-// TODO: 获取用户信息
-// store.dispatch('user/GetUserInfo').then(() => {
-//   new Vue({
-//     router,
-//     store,
-//     render: h => h(App)
-//   }).$mount('#app')
+// new Vue({
+//   el: '#app',
+//   router,
+//   store,
+//   render: h => h(App),
+//   mounted () {
+//     console.log('-------------------App 挂载')
+//     // initUserRouterAndMenu()
+//     this.$store.dispatch('app/InitRouterAndMenu')
+//   }
 // })
+
+store.dispatch('user/GetUserInfo').then(() => {
+  new Vue({
+    router,
+    store,
+    render: h => h(App),
+    mounted () {
+      store.dispatch('app/InitRouterAndMenu')
+    }
+  }).$mount('#app')
+})

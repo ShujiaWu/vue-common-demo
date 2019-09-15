@@ -79,7 +79,7 @@ axios.interceptors.response.use(response => {
       isSuccess = false
       message = response.data.msg
       // 获取用户信息接口需要单独处理
-      if (response.request.responseURL.indexOf('u/info') === -1) {
+      if (response.request.responseURL.indexOf('user/info') === -1) {
         router.replace({
           path: '/login',
           query: {

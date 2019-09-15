@@ -4,7 +4,8 @@ export default {
   state: {
     sideBar: [],
     sideBarId: undefined,
-    navBar: []
+    navBar: [],
+    breadcurmb: []
   },
   getters: {
   },
@@ -21,6 +22,9 @@ export default {
     },
     'UPDATE_NAV_BAR_MENUS' (state, menus) {
       state.navBar.splice(0, state.navBar.length, ...menus)
+    },
+    'UPDATE_BREADCURMB' (state, breadcurmb) {
+      state.breadcurmb.splice(0, state.breadcurmb.length, ...breadcurmb)
     }
   },
   /**
@@ -41,6 +45,9 @@ export default {
       if (state.sideBarId !== menu.id) {
         commit('UPDATE_SIDE_BAR_MENUS', menu.children)
       }
+    },
+    'UpdateBreadcurmb' ({ state, commit }, breadcurmb) {
+      commit('UPDATE_BREADCURMB', breadcurmb)
     }
   }
 }

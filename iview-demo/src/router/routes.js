@@ -43,7 +43,7 @@ export const defaultRoutes = [
   {
     path: '/',
     component: MainLayout,
-    redirect: 'dashboard',
+    redirect: '/dashboard',
     meta: {
       title: '主面板'
     },

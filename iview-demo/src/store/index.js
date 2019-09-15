@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 // import permission from './modules/permission'
 // import app from './modules/app'
-// import user from './modules/user'
+import user from './modules/user'
 import window from './modules/window'
 import constants from './modules/constants'
 import app from './modules/app'
@@ -15,7 +15,7 @@ const store = new Vuex.Store({
     app,
     // permission,
     // app,
-    // user,
+    user,
     window,
     constants
   }

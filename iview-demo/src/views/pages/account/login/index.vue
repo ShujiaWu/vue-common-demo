@@ -71,6 +71,14 @@ export default {
           Service.login(this.form.data).then(result => {
             this.btnStatus.loading = false
             if (result.isSuccess) {
+              this.$store
+                .dispatch('user/UserLogin', result.data)
+                .then(result => {
+                  this.$Message.success('登录成功')
+                  this.$store.dispatch('app/InitRouterAndMenu').then(() => {
+                    this.$router.replace('/')
+                  })
+                })
               // if (this.$store.state.routes.name) {
               //   this.$router.replace({
               //     name: this.$store.state.routes.name,
@@ -80,9 +88,8 @@ export default {
               // } else if (this.$store.state.routes.prev.url) {
               //   this.$router.replace(this.$store.state.routes.prev.url)
               // } else {
-              this.$router.replace('/')
+              // this.$router.replace('/')
               // }
-              this.$Message.success('登录成功')
             } else {
               this.$Message.error(result.message)
             }

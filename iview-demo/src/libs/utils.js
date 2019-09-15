@@ -47,7 +47,7 @@ export function initUserRouterAndMenu () {
     if (result.isSuccess) {
       const data = initMenuData(result.data)
       initUserRouter(data)
-      console.log(data)
+      // console.log(data)
       return data
     } else {
       return []
@@ -112,7 +112,7 @@ function initMenuData (menus, parent) {
       component: lazyLoading(item.component),
       meta: {
         hidden: item.hidden,
-        title: item.title + ' - iView 管理后台',
+        title: item.title,
         url: item.url,
         icon: item.icon,
         parent: parent,

@@ -35,7 +35,6 @@ export default {
   },
   methods: {
     modeChange (mode) {
-      console.log(mode)
       this.shrink = mode
     }
   }
