@@ -11,6 +11,6 @@
     "iview": "^3.5.0"
   },
   "devDependencies": {
-    "@vue/cli-service": "^3.5.0"
+    "@vue/cli-service": "^5.0.8"
   }
 }
